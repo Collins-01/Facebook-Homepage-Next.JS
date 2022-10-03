@@ -14,7 +14,8 @@ const Posts = ()=>{
            {
             posts?.docs.map((e)=>{
                 const data = e.data();
-                return ( <Post email='' image={data['image']} message={data['message']} name={data['name']} postImage={data['postImage']} time={1000000000}/>)
+                
+                return ( <Post email='' image={data['image']} message={data['message']} name={data['name']} postImage={data['postImage']} time={data['timestamp']['seconds']}/>)
             })
            }
         </div>

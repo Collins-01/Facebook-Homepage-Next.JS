@@ -15,7 +15,7 @@ const InputBox = ()=>{
     // Send Post to DB
     const sendPost = async (e:any)=>{
         e.preventDefault();
-        if(inputRef.current?.value === null || inputRef.current?.value.length ===0)
+        if(inputRef.current?.value === null || !inputRef.current?.value)
         {
             console.log("User did not add any input");
             return;
@@ -31,7 +31,9 @@ const InputBox = ()=>{
                        timestamp: serverTimestamp(),
                        postImage: null
                    });
-                   
+                  if(response.id.length >0) {
+                    inputRef.current!.value ='';   
+                  }
                    
                 //    if(imageToPost){
                 //     const storageRef = ref(storage,`Posts/${response.id}`);

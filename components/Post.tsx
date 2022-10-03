@@ -22,7 +22,7 @@ const Post = (props: PostProps)=>{
                     src={props.image} width={40} height={40} alt=''/>
                     <div>
                         <p className='font-medium'>{props.name}</p>
-                        <p className='text-xs text-gray-400' >{new Date(props.time).toLocaleDateString()}</p>
+                        <p className='text-xs text-gray-400' >{new Date(props.time * 1000).toLocaleDateString()}</p>
                     </div>
                 </div>
                 <p className='pt-4'>{props.message}</p>
