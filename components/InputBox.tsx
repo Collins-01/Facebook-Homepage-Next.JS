@@ -8,54 +8,54 @@ import {getDownloadURL, ref,uploadBytesResumable,uploadString} from 'firebase/st
 
 
 const InputBox = ()=>{
+    const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
     const [imageToPost , setImageToPost] = useState<string | null | ArrayBuffer | undefined>(null);
-    const [input, setInput] = useState<string|null>(null);
     const fileRef = React.createRef<HTMLInputElement>();
 
     // Send Post to DB
     const sendPost = async (e:any)=>{
         e.preventDefault();
-        console.log('hbcdbjhcbdbchjdbcjdbjhcbdjhcbdjh');
-        // event.preventDefault();
-        if(!input || input.length ===0)
+        if(inputRef.current?.value === null || inputRef.current?.value.length ===0)
         {
             console.log("User did not add any input");
-            alert('No Input');
             return;
         }
-          try {
-            const collectionRef = collection(db, "Posts");
-            const response =   await addDoc(collectionRef, {
-                   message: input,
-                   name: 'Oriakhi Collins',
-                   email: 'collins.oriakhi.dev@gmail.com',
-                   image: 'https://images.unsplash.com/photo-1610859874384-c97e0ff5b433?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
-                   timestamp: serverTimestamp(),
-                   postImage: null
-               });
-               console.log(`Response ::::: ${response.id}`);
-               if(imageToPost){
-                const storageRef = ref(storage,`Posts/${response.id}`);
-                const uploadTask = uploadBytesResumable(storageRef,imageToPost as ArrayBuffer)
-                uploadTask.on('state_changed',(snapshot)=>{
-                    setInput(null)
-                },(err)=>{
-                    console.log(`An Error occured:::: ${err}`)
-                }, ()=>{
-                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-                        console.log(`Download URL :::: ${downloadURL}`)
-                        // setDoc(collectionRef, {
-                        //     postImage: downloadURL,
-                            
-                        // })
-                    });
-                });
-                
-                // const uploadResult = await uploadString(storageRef, imageToPost!.toString(), 'data_url');
-               }
-          } catch (error) {
-            console.log(`Error::::: ${error}`)
-            alert(error);
+          else{
+            try {
+                const collectionRef = collection(db, "Posts");
+                const response =   await addDoc(collectionRef, {
+                       message: inputRef.current?.value,
+                       name: 'Oriakhi Collins',
+                       email: 'collins.oriakhi.dev@gmail.com',
+                       image: 'https://images.unsplash.com/photo-1610859874384-c97e0ff5b433?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+                       timestamp: serverTimestamp(),
+                       postImage: null
+                   });
+                   
+                   
+                //    if(imageToPost){
+                //     const storageRef = ref(storage,`Posts/${response.id}`);
+                //     const uploadTask = uploadBytesResumable(storageRef,imageToPost as ArrayBuffer)
+                //     uploadTask.on('state_changed',(snapshot)=>{
+                //         setInput(null)
+                //     },(err)=>{
+                //         console.log(`An Error occured:::: ${err}`)
+                //     }, ()=>{
+                //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+                //             console.log(`Download URL :::: ${downloadURL}`)
+                //             // setDoc(collectionRef, {
+                //             //     postImage: downloadURL,
+                                
+                //             // })
+                //         });
+                //     });
+                    
+                //     // const uploadResult = await uploadString(storageRef, imageToPost!.toString(), 'data_url');
+                //    }
+              } catch (error) {
+                console.log(`Error::::: ${error}`)
+                alert(error);
+              }
           }
     }
 
@@ -85,10 +85,10 @@ const InputBox = ()=>{
                  src={'https://images.unsplash.com/photo-1610859874384-c97e0ff5b433?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80'}/>
 
                  <form className='flex flex-1' >
-                    <input onChange={(e)=>setInput(e.target.value)}
+                    <input ref={inputRef} 
                     className='rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none'
                     type='text' placeholder={`Whats's on your mind,Collins ?`}/>
-                    <button  onClick={sendPost}>Submit</button>
+                    <button  hidden onClick={sendPost}>Submit</button>
                  </form>
                  {/* Display Image to post */}
                  {
