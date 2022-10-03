@@ -12,7 +12,7 @@ interface HeaderIconProps{
             {/*h-5 group-hover: text-blue-500  sm:-7 mx-auto text-gray-500*/}
             <div className='h-5 '>
             {
-             props.icon   
+             props.icon  &&  <div className= {`h-5 text-gray-500 text-center sm:h-7 mx-auto group-hover:text-blue-500 ${props.active && "text-blue-500"}`}> {props.icon } </div>  
             }
             </div> 
         </div> 

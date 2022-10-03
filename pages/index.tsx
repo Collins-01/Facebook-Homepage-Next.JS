@@ -20,23 +20,23 @@ const Home: NextPage = () => {
   //     <Login/>
   //   );
   // }
-  return <Login/>
-  // return (
-  //   <div className='h-screen bg-gray-100 overflow-hidden'>
-  //       <Head>
-  //               <title>Facebook</title>
-  //           </Head>
-  //           <Header/>
+  // return <Login/>
+  return (
+    <div className='h-screen bg-gray-100 overflow-hidden'>
+        <Head>
+                <title>Facebook</title>
+            </Head>
+            <Header/>
 
-  //           <main className='flex'>
-  //               {/* Sidebar */}
-  //               <SideBar/>
-  //               <Feed/>
-  //               <Widget/>
+            <main className='flex'>
+                {/* Sidebar */}
+                <SideBar/>
+                <Feed/>
+                <Widget/>
                 
-  //           </main>
-  //   </div> 
-  // )
+            </main>
+    </div> 
+  )
 }
 
 export default Home;
