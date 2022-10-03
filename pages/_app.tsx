@@ -12,5 +12,7 @@ function MyApp({ Component,  pageProps: {  ...pageProps }, }: AppProps) {
 
 export default MyApp
 
-// Secret ==== 61e37fb3b2dcfb85e2ec65fbeb3817f5
-// app Id ==== 481361357250343
+
+
+
+
